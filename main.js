@@ -13,7 +13,8 @@ function showLoading(show) {
   loader.setAttribute('aria-hidden', String(!show))
   loader.style.display = show ? 'flex' : 'none'
   /* disable button to prevent duplicates */
-  diceButton.disabled = show
+  diceButton.style.pointerEvents = show ? 'none' : ''
+  diceButton.setAttribute('aria-disabled', String(show))
 }
 
 /* random angle so animation feels different each time */
@@ -57,8 +58,7 @@ async function getAdvice() {
   }
 }
 
-/* trigger on click */
-diceButton.addEventListener('click', getAdvice)
+/* removed duplicate click listener; handled by data-action loop */
 diceButton.addEventListener('keydown', function(e) {
   /* trigger on Enter or Space to make button keyboard-friendly */
   if (e.key === 'Enter' || e.key === ' ') {
