@@ -1,0 +1,33 @@
+/* root variable for desktop card width */
+:root{--card-w:540px}
+
+@media (min-width:900px){  /* apply styles only on screens at least 900px wide */
+body{padding:64px}
+  /* app area fills available height minus padding & centers content */
+  .app{min-height:calc(100vh - 128px);align-items:center;justify-content:center}
+  /* increase width, padding & round corners */
+  .card{width:var(--card-w);padding:48px 48px 200px;border-radius:20px}
+  /* slightly tighter lines for advice text */
+  .advice-text{font-size:28px;line-height:1.18;max-width:420px;margin:0 auto;padding:0 16px}
+  /* provided assets divider may grow, kept above layers */
+  .divider{max-width:320px;z-index:30;position:relative}
+  .loader{bottom:-128px;z-index:25}
+  /* dice shadow adjustments for more depth on large screen */
+  .dice{
+    width:56px;
+    height:56px;
+    bottom:-76px;
+    z-index:20;
+    box-shadow:0 22px 64px rgba(0,150,90,0.28),0 0 36px rgba(0,150,90,0.14),inset 0 -6px 12px rgba(0,0,0,0.18);
+  }
+
+ .dice img{width:34%}    /* keeps dice icon proportional */
+ .advice-source{z-index:32;position:relative}
+ .attribution{
+    margin-top:22px;
+    font-size:13px;
+    color:rgba(255,255,255,0.7);
+    text-align:center;
+    max-width:540px;
+  }
+} 
