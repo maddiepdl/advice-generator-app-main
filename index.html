@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Advice generator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advice Generator</title>
+  <!-- google font from styleguide -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;800&display=swap" rel="stylesheet" />
+  <!-- load Bootstrap CSS from CDN for spinner -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!--mobile-first base styles & variables -->
+  <link rel="stylesheet" href="mobile.css" />
+  <!-- desktop overrides when screen is at least 900px wide -->
+  <link rel="stylesheet" href="desktop.css" media="screen and (min-width:900px)" />
+  <!-- axios library for HTTP requests; deferred so it loads after the HTML is parsed -->
+  <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- JS file with logic, event handlers & API calls; defer also runs it after parsing -->
+  <script defer src="main.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" /> <!--favicon from assets -->
 </head>
 <body>
-
-  Advice #<!-- Advice ID goes here -->
-
-  "<!-- Advice text goes here -->"
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <!-- main container, aria polite lets screenreaders announce dynamic update without interruption -->
+  <main id="app" class="app" aria-live="polite">
+    <!-- card region for advice with aria-label for screen readers -->
+    <section class="card" role="region" aria-label="Advice card">
+      <!-- slip ID display; JS updates with current slip id -->
+      <span id="advice-id" class="advice-id">ADVICE #—</span>
+      <!-- semantic blockquote for advice text with aria -->
+      <blockquote class="advice" cite="https://api.adviceslip.com" aria-labelledby="advice-text">
+        <!-- advice text shown; initially shows a loading placeholder -->
+        <p id="advice-text" class="advice-text">Loading advice…</p>
+        <!-- footer inside blockquote with short credit -->
+        <footer id="advice-footer" class="advice-source">— Advice Slip API</footer>
+      </blockquote>
+      <!-- mobile version of provided divider image; empty alt because it's decorative and aria-hidden -->
+      <img src="./images/pattern-divider-mobile.svg" class="divider mobile-only" alt="" aria-hidden="true" />
+      <!-- desktop version; swapped by my CSS based on viewport -->
+      <img src="./images/pattern-divider-desktop.svg" class="divider desktop-only" alt="" aria-hidden="true" />
+      <!--  loader area with Bootstrap spinner and aria-->
+      <div id="loader" class="loader" role="status" aria-hidden="true">
+        <div class="spinner-border text-light" style="width:1.75rem;height:1.75rem;" aria-hidden="true"></div>
+        <span class="visually-hidden">Loading</span>
+      </div>
+      <!--dice button triggers fetching a new piece of advice; data-action for JS to attach behavior -->
+      <div class="controls">
+        <!-- dice image from provided assets with alt text-->
+        <button id="dice-btn" class="dice" aria-label="Get new advice" title="Get new advice" data-action="new-advice">
+          <img src="./images/icon-dice.svg" alt="Dice icon" />
+        </button>
+      </div>
+    </section>
+    <!-- attribution links & API source  -->
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener">Frontend Mentor</a>.
+      Data from <a href="https://api.adviceslip.com" target="_blank" rel="noopener">Advice Slip API</a>.
+      Coded by <a href="#" rel="author">MaddieP</a>.
+    </div>
+  </main>
 </body>
 </html>

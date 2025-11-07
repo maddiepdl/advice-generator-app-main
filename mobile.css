@@ -1,0 +1,157 @@
+/* root variables so colors & font are easy to change in 1 place */
+:root{
+  --bg-deep: hsl(218,23%,16%);
+  --bg-mid: hsl(217,19%,24%);
+  --accent: hsl(150,100%,46%);
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+*{box-sizing:border-box}  /* universal box-sizing reset */
+
+/*page fills the viewport & removed default margin */
+html,body{
+  height:100%; 
+  margin:0;
+  font-family:var(--font);
+}
+
+/* page style, background & center alignment */
+body{
+  background: radial-gradient(circle at 10% 10%, #071018 0%, #0b1319 35%, #081018 100%);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:36px 16px;
+  min-height:100vh; /* ensures body is at least the height of viewport */
+}
+
+/* container constraints and stacked column layout; desktop overrides to widen it */
+.app{
+  width:100%; /* allows app to grow to full width of its container */
+  max-width:420px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* advice card container  */
+.card{
+  position:relative; /* needed for absolutely positioned dice */
+  width:100%;
+  background:linear-gradient(180deg,var(--bg-deep),var(--bg-mid));
+  border-radius:18px;
+  padding:36px 24px 160px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,0.6);
+  overflow:visible; /* allows dice to visually overflow */
+}
+
+/* slip ID badge styling */
+.advice-id{
+  display:inline-block;
+  background:rgba(0,0,0,0.12);
+  color:var(--accent);
+  padding:6px 12px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:13px;
+}
+
+/* blockquote wrapper spacing reset */
+.advice{margin:18px 0 6px;padding:0;border:none}
+
+/* advice text styling: max-width limits line length*/
+.advice-text{
+  margin:0;
+  font-weight:800;
+  font-size:22px;
+  line-height:1.25;
+  color:#fff;
+  padding:0 12px;
+  max-width:360px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* small attribution under quote */
+.advice-source{
+  margin-top:12px;
+  color:rgba(255,255,255,0.85);
+  font-size:12px;
+  position:relative;
+  z-index:6; /* sits above background elements */
+}
+
+/* provided divider image sizing & placement */
+.divider{
+  display:block;
+  margin:18px auto;
+  max-width:220px;
+  opacity:1;
+  position:relative;
+  z-index:14; /* sits above so the dice button overlaps nicely */
+}
+
+.mobile-only{display:block}
+.desktop-only{display:none} /* hide by default on mobile; shown on desktop override */
+
+/* spinner loader container, hidden by default */
+.loader{
+  position:absolute;
+  left:50%;
+  bottom:-106px;
+  transform:translateX(-50%); /* perfect centering */
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:13;
+}
+
+/* when JS sets aria-hidden="false", show the loader as a flex container */
+.loader[aria-hidden="false"]{display:flex}
+
+.controls{position:relative;height:0}  /* positioned anchor for the dice button */
+
+/* dice button image absolutely position so it floats outside card */
+.dice{
+  position:absolute;
+  left:50%;
+  bottom:-56px;
+  transform:translateX(-50%);
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background: linear-gradient(180deg, hsl(150,100%,42%) 0%, var(--accent) 100%);
+  border:none;
+  display:grid;
+  place-items:center;
+  box-shadow:0 18px 48px rgba(0,150,90,0.22),0 0 28px rgba(0,150,90,0.12),inset 0 -4px 8px rgba(0,0,0,0.18);
+  cursor:pointer;
+  transition:transform 160ms ease,box-shadow 160ms ease;
+  z-index:11;
+}
+
+/* dice image sizing */
+.dice img{width:34%;height:auto;filter:none}
+
+/* hover & focus: lift & increase shadow for feedback */
+.dice:hover,.dice:focus{
+  transform:translateX(-50%) translateY(-6px); /* lifts button slightly */
+  box-shadow:0 26px 72px rgba(0,150,90,0.30); 
+  outline:none; 
+}
+
+/* active pressed state to feel responsive; slight shrink to mimic pushing a physical button */
+.dice:active{
+  transform:translateX(-50%) translateY(-2px) scale(0.98); /* subtle press effect */
+}
+
+/* attribution under card */
+.attribution{
+  margin-top:18px;
+  font-size:12px;
+  color:rgba(255,255,255,0.65);
+  text-align:center;
+  max-width:420px;
+}
