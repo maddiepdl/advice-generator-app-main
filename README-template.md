@@ -54,7 +54,7 @@ The Advice Generator App fetches random advice from the [Advice Slip API](https:
 ---
 
 ## How to use
-- See repo [https://github.com/maddiepdl/advice-generator-app-main/tree/dev](https://github.com/maddiepdl/advice-generator-app-main/tree/dev)  
+- See repo [https://github.com/maddiepdl/advice-generator-app-main/tree/dev](https://github.com/maddiepdl/advice-generator-app-main/tree/dev) or GitPages https://maddiepdl.github.io/advice-generator-app-main/
 - Inside you’ll find the main files: `index.html`, `mobile.css`, `desktop.css`, and `main.js`  
 - Open `index.html` in your browser  
 - Click the button for advice. Click again for another piece of advice, and so forth.
